@@ -1,0 +1,86 @@
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-brand">
+      <h2>ShopEase</h2>
+      <p>Create an account and start shopping</p>
+    </div>
+
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="auth-form">
+
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="Enter your name"
+          [class.invalid]="f['name'].touched && f['name'].invalid"
+        />
+        <span class="field-error" *ngIf="f['name'].touched && f['name'].errors?.['required']">
+          Name is required
+        </span>
+        <span class="field-error" *ngIf="f['name'].touched && f['name'].errors?.['minlength']">
+          Must be at least 2 characters
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="you@example.com"
+          [class.invalid]="f['email'].touched && f['email'].invalid"
+        />
+        <span class="field-error" *ngIf="f['email'].touched && f['email'].errors?.['required']">
+          Email is required
+        </span>
+        <span class="field-error" *ngIf="f['email'].touched && f['email'].errors?.['email']">
+          Enter a valid email address
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="At least 6 characters"
+          [class.invalid]="f['password'].touched && f['password'].invalid"
+        />
+        <span class="field-error" *ngIf="f['password'].touched && f['password'].errors?.['required']">
+          Password is required
+        </span>
+        <span class="field-error" *ngIf="f['password'].touched && f['password'].errors?.['minlength']">
+          Must be at least 6 characters
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input
+          id="confirmPassword"
+          type="password"
+          formControlName="confirmPassword"
+          placeholder="Re-enter your password"
+          [class.invalid]="f['confirmPassword'].touched && f['confirmPassword'].invalid"
+        />
+        <span class="field-error" *ngIf="f['confirmPassword'].touched && f['confirmPassword'].errors?.['required']">
+          Please confirm your password
+        </span>
+      </div>
+
+      <p class="form-error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+      <button type="submit" class="submit-btn" [disabled]="isLoading">
+        {{ isLoading ? 'Please wait...' : 'Sign Up' }}
+      </button>
+    </form>
+
+    <p class="switch-link">
+      Already have an account? <a routerLink="/login">Log in</a>
+    </p>
+  </div>
+</div>
