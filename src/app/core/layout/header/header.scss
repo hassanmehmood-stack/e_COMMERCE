@@ -1,0 +1,84 @@
+.header {
+
+  width: 100%;
+  background: white;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  .container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav {
+    display: flex;
+    gap: 28px;
+    a {
+      text-decoration: none;
+      color: #555;
+      font-size: 16px;
+      transition: .3s;
+      &:hover {
+        color: #2563eb;
+      }
+    }
+    .active {
+      color: #2563eb;
+      font-weight: 600;
+    }
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    .icon-btn {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 20px;
+    }
+    .cart {
+      position: relative;
+      text-decoration: none;
+      font-size: 20px;
+      span {
+        position: absolute;
+        top: -10px;
+        right: -12px;
+        background: red;
+        color: white;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+      }
+
+    }
+
+    .account {
+      text-decoration: none;
+      background: #2563eb;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: .3s;
+
+      &:hover {
+        background: #1d4ed8;
+
+      }
+    }
+  }
+}
