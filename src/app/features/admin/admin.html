@@ -1,0 +1,78 @@
+<section class="admin-page">
+
+  <div class="container">
+
+    <div class="admin-header">
+
+      <div>
+        <span class="admin-badge">Admin Panel</span>
+        <h1>Product Management</h1>
+        <p>Manage your store products from one place.</p>
+      </div>
+
+      <button
+        class="add-btn"
+        routerLink="/admin/add-product">
+        + Add Product
+      </button>
+
+    </div>
+
+
+    <div class="admin-stats">
+
+      <div class="stat-card">
+        <span>Total Products</span>
+        <strong>0</strong>
+      </div>
+
+      <div class="stat-card">
+        <span>Total Orders</span>
+        <strong>0</strong>
+      </div>
+
+      <div class="stat-card">
+        <span>Total Users</span>
+        <strong>0</strong>
+      </div>
+
+    </div>
+
+
+    <div class="products-section">
+
+      <div class="section-header">
+
+        <div>
+          <h2>Products</h2>
+          <p>View and manage your store products.</p>
+        </div>
+
+      </div>
+
+
+      <div class="empty-state">
+
+        <div class="empty-icon">📦</div>
+
+        <h3>No Products Yet</h3>
+
+        <p>
+          You haven't added any products yet.
+          Start by adding your first product.
+        </p>
+
+        <button
+          class="add-btn"
+          routerLink="/admin/add-product"
+        >
+          + Add Your First Product
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

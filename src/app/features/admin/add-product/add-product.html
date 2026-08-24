@@ -1,0 +1,196 @@
+<section class="add-product-page">
+
+  <div class="container">
+
+    <!-- Header -->
+    <div class="page-header">
+
+      <div>
+        <span class="admin-badge">Admin Panel</span>
+
+        <h1>Add Product</h1>
+
+        <p>
+          Add a new product to your store.
+        </p>
+      </div>
+
+      <button
+        type="button"
+        class="back-btn"
+        routerLink="/admin"
+      >
+        ← Back to Products
+      </button>
+
+    </div>
+
+
+    <!-- Form Card -->
+    <div class="form-card">
+
+      <form>
+
+        <div class="form-grid">
+
+          <!-- Product Name -->
+          <div class="form-group full">
+
+            <label for="name">
+              Product Name
+            </label>
+
+            <input
+              id="name"
+              type="text"
+              placeholder="Enter product name"
+            />
+
+          </div>
+
+
+          <!-- Price -->
+          <div class="form-group">
+
+            <label for="price">
+              Price
+            </label>
+
+            <div class="input-wrapper">
+
+              <span class="input-prefix">
+                PKR
+              </span>
+
+              <input
+                id="price"
+                type="number"
+                placeholder="0"
+                min="0"
+              />
+
+            </div>
+
+          </div>
+
+
+          <!-- Stock -->
+          <div class="form-group">
+
+            <label for="stock">
+              Stock
+            </label>
+
+            <input
+              id="stock"
+              type="number"
+              placeholder="0"
+              min="0"
+            />
+
+          </div>
+
+
+          <!-- Category -->
+          <div class="form-group">
+
+            <label for="category">
+              Category
+            </label>
+
+            <select id="category">
+
+              <option value="">
+                Select category
+              </option>
+
+              <option value="fruits">
+                Fruits
+              </option>
+
+              <option value="vegetables">
+                Vegetables
+              </option>
+
+              <option value="dairy">
+                Dairy
+              </option>
+
+              <option value="bakery">
+                Bakery
+              </option>
+
+              <option value="beverages">
+                Beverages
+              </option>
+
+              <option value="other">
+                Other
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <!-- Image URL -->
+          <div class="form-group">
+
+            <label for="image">
+              Image URL
+            </label>
+
+            <input
+              id="image"
+              type="url"
+              placeholder="https://example.com/image.jpg"
+            />
+
+          </div>
+
+
+          <!-- Description -->
+          <div class="form-group full">
+
+            <label for="description">
+              Description
+            </label>
+
+            <textarea
+              id="description"
+              rows="6"
+              placeholder="Write a description for your product..."
+            ></textarea>
+
+          </div>
+
+        </div>
+
+
+        <!-- Actions -->
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="btn btn-ghost"
+            routerLink="/admin"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            Add Product
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</section>

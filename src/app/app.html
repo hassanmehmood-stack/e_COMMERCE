@@ -1,9 +1,55 @@
 
-<!-- <h1>This is my e-commerce platform {{title()}}</h1> -->
-<app-header></app-header>
-<main>
-    <router-outlet />
-</main>
-<app-footer></app-footer>
+@if (authReady$ | async) {
+    <app-header></app-header>
+    <main>
+        <router-outlet />
+    </main>
+    <app-footer></app-footer>
+} @else {
+    <section class="admin-skeleton" aria-label="Loading your dashboard" role="status">
+        <div class="skeleton-header">
+            <div class="skeleton-mark shimmer"></div>
+            <div class="skeleton-header-actions">
+                <div class="skeleton-pill shimmer"></div>
+                <div class="skeleton-avatar shimmer"></div>
+            </div>
+        </div>
+
+        <div class="skeleton-layout">
+            <aside class="skeleton-sidebar">
+                <div class="skeleton-sidebar-brand shimmer"></div>
+                <div class="skeleton-nav-list">
+                    <div class="skeleton-nav-item active shimmer"></div>
+                    <div class="skeleton-nav-item shimmer"></div>
+                    <div class="skeleton-nav-item shimmer"></div>
+                    <div class="skeleton-nav-item shimmer"></div>
+                    <div class="skeleton-nav-item shimmer"></div>
+                </div>
+                <div class="skeleton-sidebar-footer shimmer"></div>
+            </aside>
+
+            <main class="skeleton-content">
+                <div class="skeleton-heading">
+                    <div class="skeleton-title shimmer"></div>
+                    <div class="skeleton-subtitle shimmer"></div>
+                </div>
+
+                <div class="skeleton-stat-grid">
+                    <div class="skeleton-stat-card shimmer"></div>
+                    <div class="skeleton-stat-card shimmer"></div>
+                    <div class="skeleton-stat-card shimmer"></div>
+                    <div class="skeleton-stat-card shimmer"></div>
+                </div>
+
+                <div class="skeleton-panel shimmer">
+                    <div class="skeleton-panel-heading"></div>
+                    <div class="skeleton-chart">
+                        <div></div><div></div><div></div><div></div><div></div><div></div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </section>
+}
 
 

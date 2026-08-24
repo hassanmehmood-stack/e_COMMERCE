@@ -14,6 +14,7 @@ import { AuthService } from '../../../services/auth';
 export class SignupComponent {
   signupForm: FormGroup;
   errorMessage: string = '';
+  successMessage: string = '';
   isLoading: boolean = false;
 
   constructor(
@@ -31,6 +32,7 @@ export class SignupComponent {
 
   async onSubmit(): Promise<void> {
     this.errorMessage = '';
+    this.successMessage = '';
 
     if (this.signupForm.invalid) {
       this.signupForm.markAllAsTouched();
@@ -40,7 +42,7 @@ export class SignupComponent {
     const { name, email, password, confirmPassword } = this.signupForm.value;
 
     if (password !== confirmPassword) {
-      this.errorMessage = 'Passwords match nahi ho rahe';
+      this.errorMessage = 'Passwords do not match';
       return;
     }
 
@@ -48,7 +50,13 @@ export class SignupComponent {
 
     try {
       await this.authService.signup(name, email, password);
-      this.router.navigate(['/products']);
+      this.successMessage = 'Signed up successfully! Please log in.';
+      this.signupForm.reset();
+
+      // Wait a moment so the user can see the message, then go to login
+      setTimeout(() => {
+        this.router.navigate(['/login']);
+      }, 5000);
     } catch (error: any) {
       this.errorMessage = this.getFriendlyError(error.code);
     } finally {
@@ -59,13 +67,13 @@ export class SignupComponent {
   private getFriendlyError(code: string): string {
     switch (code) {
       case 'auth/email-already-in-use':
-        return 'Ye email pehle se register hai';
+        return 'This email is already registered';
       case 'auth/invalid-email':
-        return 'Email sahi format mein nahi hai';
+        return 'Please enter a valid email address';
       case 'auth/weak-password':
-        return 'Password kam se kam 6 characters ka hona chahiye';
+        return 'Password must be at least 6 characters';
       default:
-        return 'Kuch masla ho gaya, dobara try karo';
+        return 'Something went wrong, please try again';
     }
   }
 
