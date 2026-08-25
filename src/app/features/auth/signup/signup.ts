@@ -11,6 +11,7 @@ import { AuthService } from '../../../services/auth';
   templateUrl: './signup.html',
   styleUrl: './signup.scss'
 })
+
 export class SignupComponent {
   signupForm: FormGroup;
   errorMessage: string = '';
@@ -53,7 +54,6 @@ export class SignupComponent {
       this.successMessage = 'Signed up successfully! Please log in.';
       this.signupForm.reset();
 
-      // Wait a moment so the user can see the message, then go to login
       setTimeout(() => {
         this.router.navigate(['/login']);
       }, 5000);

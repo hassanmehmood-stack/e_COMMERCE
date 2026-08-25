@@ -15,6 +15,8 @@ export class Admin implements OnInit {
 
   products = signal<Product[]>([]);
   isLoading = signal(true);
+  deletingProductId = signal<string | null>(null);
+  successMessage = signal('');
   errorMessage = signal('');
 
   async ngOnInit(): Promise<void> {
@@ -25,6 +27,30 @@ export class Admin implements OnInit {
       this.errorMessage.set('Unable to load products right now.');
     } finally {
       this.isLoading.set(false);
+    }
+  }
+
+  async deleteProduct(id: string): Promise<void> {
+    const confirmed = window.confirm('Are you sure you want to delete this product?');
+
+    if (!confirmed) {
+      return;
+    }
+
+    this.successMessage.set('');
+    this.errorMessage.set('');
+    this.deletingProductId.set(id);
+
+    try {
+      await this.productService.deleteProduct(id);
+      this.products.update(products => products.filter(product => product.id !== id));
+      this.successMessage.set('Product deleted successfully');
+      setTimeout(() => this.successMessage.set(''), 3500);
+    } catch (error) {
+      console.error('Delete product error:', error);
+      this.errorMessage.set('Unable to delete this product right now.');
+    } finally {
+      this.deletingProductId.set(null);
     }
   }
 }

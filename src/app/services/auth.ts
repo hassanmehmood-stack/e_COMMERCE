@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
+import {UserData} from '../models/users.type';
 
 import {
-  getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
@@ -16,30 +16,21 @@ import {
 } from 'firebase/firestore';
 
 import { BehaviorSubject } from 'rxjs';
-import { firebaseApp, db } from '../core/firebase.config';
-
-const auth = getAuth(firebaseApp);
-
-export interface UserData {
-  uid: string;
-  name: string;
-  email: string;
-  role: 'admin' | 'user';
-}
+import { auth, db } from '../core/firebase.config';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
 
   private currentUserSubject =
-    new BehaviorSubject<UserData | null>(null);
+    new BehaviorSubject<UserData | null>(null); 
 
   currentUser$ =
     this.currentUserSubject.asObservable();
 
 
-  // Firebase auth state ready hai ya nahi
   private authReadySubject =
     new BehaviorSubject<boolean>(false);
 
@@ -50,7 +41,6 @@ export class AuthService {
   constructor() {
 
     onAuthStateChanged(auth, async (user: User | null) => {
-
       if (user) {
 
         const userData =
@@ -61,10 +51,8 @@ export class AuthService {
       } else {
 
         this.currentUserSubject.next(null);
-
       }
 
-      // Firebase ne initial auth check complete kar liya
       this.authReadySubject.next(true);
     });
   }
@@ -118,6 +106,8 @@ export class AuthService {
 
     this.currentUserSubject.next(userData);
 
+    console.log(auth.currentUser);
+
     return userData;
   }
 
@@ -129,6 +119,7 @@ export class AuthService {
     this.currentUserSubject.next(null);
   }
 
+  
 
   private async fetchUserData(
     uid: string

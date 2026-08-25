@@ -364,6 +364,39 @@ $bp-mobile: 600px;
 
 }
 
+.success-message,
+.error-message {
+
+  padding: 13px 16px;
+
+  margin-bottom: 22px;
+
+  border-radius: $radius-sm;
+
+  font-size: 13px;
+
+}
+
+.success-message {
+
+  border: 1px solid rgba(201, 162, 75, 0.55);
+
+  background: rgba(201, 162, 75, 0.12);
+
+  color: $gold-light;
+
+}
+
+.error-message {
+
+  border: 1px solid rgba(217, 130, 120, 0.35);
+
+  background: rgba(184, 92, 82, 0.12);
+
+  color: #D98278;
+
+}
+
 
 // ==========================================================================
 // EMPTY STATE

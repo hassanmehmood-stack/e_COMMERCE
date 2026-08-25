@@ -4,15 +4,10 @@ import { Product } from '../../models/products.type';
 import { CartService } from '../../services/cart';
 
 @Component({
-
   selector: 'app-products',
-
   standalone: true,
-
   imports: [],
-
   templateUrl: './products.html',
-
   styleUrl: './products.scss',
 
 })
@@ -32,7 +27,6 @@ export class Products {
     this.successMessage.set('Product added to cart');
     setTimeout(() => this.successMessage.set(''), 3500);
   }
-
 
 
   async ngOnInit() {

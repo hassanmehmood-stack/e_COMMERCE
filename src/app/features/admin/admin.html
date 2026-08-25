@@ -50,6 +50,13 @@
 
       </div>
 
+      @if (successMessage()) {
+        <div class="success-message" role="status">{{ successMessage() }}</div>
+      }
+      @if (errorMessage() && !isLoading()) {
+        <div class="error-message" role="alert">{{ errorMessage() }}</div>
+      }
+
 
       @if (isLoading()) {
         <div class="empty-state">
@@ -109,7 +116,18 @@
                   <td data-label="Stock">{{ product.stock }}</td>
                   <td class="product-actions" data-label="Actions">
                     <a class="action-btn edit-btn" [routerLink]="['/admin/edit-product', product.id]">Edit</a>
-                    <button class="action-btn delete-btn" type="button">Delete</button>
+                    <button
+                      class="action-btn delete-btn"
+                      type="button"
+                      [disabled]="deletingProductId() === product.id"
+                      (click)="deleteProduct(product.id)"
+                    >
+                      @if (deletingProductId() === product.id) {
+                        Deleting...
+                      } @else {
+                        Delete
+                      }
+                    </button>
                   </td>
                 </tr>
               }

@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app';
+import { browserLocalPersistence, initializeAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 export const firebaseConfig = {
@@ -14,3 +15,7 @@ export const firebaseConfig = {
 export const firebaseApp = initializeApp(firebaseConfig);
 
 export const db = getFirestore(firebaseApp);
+
+export const auth = initializeAuth(firebaseApp, {
+  persistence: browserLocalPersistence
+});

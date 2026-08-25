@@ -10,7 +10,9 @@ import { ProductService } from '../../../services/product';
   templateUrl: './edit-product.html',
   styleUrl: './edit-product.scss'
 })
+
 export class EditProduct implements OnInit {
+    
   private readonly fb = inject(FormBuilder);
   private readonly productService = inject(ProductService);
   private readonly route = inject(ActivatedRoute);
