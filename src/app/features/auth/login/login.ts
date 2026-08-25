@@ -42,19 +42,20 @@ export class LoginComponent {
 
     try {
       const userData = await this.authService.login(email, password);
-      
-    
+
+      if (!userData || !['admin', 'user'].includes(userData.role)) {
+        this.errorMessage.set('Your account profile could not be verified');
+        return;
+      }
 
       this.successMessage.set('You are successfully logged in!');
       this.loginForm.reset();
 
-      setTimeout(() => {
-        if (userData?.role === 'admin') {
-          this.router.navigate(['/admin']);
-        } else {
-          this.router.navigate(['/products']);
-        }
-      }, 3000);
+      if (userData.role === 'admin') {
+        await this.router.navigate(['/admin']);
+      } else {
+        await this.router.navigate(['/products']);
+      }
 
     } catch (error: any) {
       console.error('Login error:', error);
@@ -66,6 +67,7 @@ export class LoginComponent {
         '';
 
       this.errorMessage.set(this.getFriendlyError(code));
+    } finally {
       this.isLoading.set(false);
     }
   }

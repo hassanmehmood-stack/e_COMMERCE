@@ -23,7 +23,7 @@
 
       <div class="stat-card">
         <span>Total Products</span>
-        <strong>0</strong>
+        <strong>{{ products().length }}</strong>
       </div>
 
       <div class="stat-card">
@@ -51,7 +51,20 @@
       </div>
 
 
-      <div class="empty-state">
+      @if (isLoading()) {
+        <div class="empty-state">
+          <div class="empty-icon loading-icon" aria-hidden="true"></div>
+          <h3>Loading Products</h3>
+          <p>Fetching your catalog from the store.</p>
+        </div>
+      } @else if (errorMessage()) {
+        <div class="empty-state">
+          <div class="empty-icon">!</div>
+          <h3>Could not load products</h3>
+          <p>{{ errorMessage() }}</p>
+        </div>
+      } @else if (products().length === 0) {
+        <div class="empty-state">
 
         <div class="empty-icon">📦</div>
 
@@ -69,7 +82,41 @@
           + Add Your First Product
         </button>
 
-      </div>
+        </div>
+      } @else {
+        <div class="product-table-wrap">
+          <table class="product-table">
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Category</th>
+                <th scope="col">Price</th>
+                <th scope="col">Stock</th>
+                <th scope="col"><span class="visually-hidden">Actions</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (product of products(); track product.id) {
+                <tr>
+                  <td data-label="Product">
+                    <div class="product-cell">
+                      <img [src]="product.image" [alt]="product.name" />
+                      <span>{{ product.name }}</span>
+                    </div>
+                  </td>
+                  <td data-label="Category">{{ product.category }}</td>
+                  <td data-label="Price">PKR {{ product.price }}</td>
+                  <td data-label="Stock">{{ product.stock }}</td>
+                  <td class="product-actions" data-label="Actions">
+                    <a class="action-btn edit-btn" [routerLink]="['/admin/edit-product', product.id]">Edit</a>
+                    <button class="action-btn delete-btn" type="button">Delete</button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
 
     </div>
 

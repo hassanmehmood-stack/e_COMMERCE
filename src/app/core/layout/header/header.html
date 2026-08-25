@@ -108,10 +108,11 @@
 
 
       <!-- Cart -->
-      <a
-        routerLink="/cart"
+      <button
         class="cart-btn"
+        type="button"
         aria-label="Shopping cart"
+        (click)="openCart()"
       >
 
         <svg
@@ -134,10 +135,10 @@
         </svg>
 
         <span class="cart-count">
-          0
+          {{ cartService.totalItems() }}
         </span>
 
-      </a>
+      </button>
 
 
       <!-- Login -->

@@ -6,6 +6,9 @@ import { SignupComponent} from './features/auth/signup/signup';
 import { adminGuard } from './guards/admin-guard';
 import { Admin } from './features/admin/admin';
 import { AddProduct } from './features/admin/add-product/add-product';
+import { EditProduct } from './features/admin/edit-product/edit-product';
+import { Cart } from './features/cart/cart';
+import { userGuard } from './guards/user-guard';
 
 
 export const routes: Routes = [
@@ -16,6 +19,7 @@ export const routes: Routes = [
   {
     path: 'products',
     component: Products,
+    canActivate: [userGuard]
   },
   {
     path : 'login',
@@ -32,7 +36,18 @@ export const routes: Routes = [
   },
   {
     path: 'admin/add-product',
-    component: AddProduct
+    component: AddProduct,
+    canActivate: [adminGuard]
+  },
+  {
+    path: 'admin/edit-product/:id',
+    component: EditProduct,
+    canActivate: [adminGuard]
+  },
+  {
+    path: 'cart',
+    component: Cart,
+    canActivate: [userGuard]
   }
 ];
 

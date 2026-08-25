@@ -4,9 +4,10 @@ import { RouterOutlet } from '@angular/router';
 import { Header } from './core/layout/header/header';
 import { Footer } from './core/layout/footer/footer';
 import { AuthService } from './services/auth';
+import { CartSidebar } from './core/layout/cart-sidebar/cart-sidebar';
 
 @Component({
-  imports: [AsyncPipe, RouterOutlet, Footer, Header],
+  imports: [AsyncPipe, RouterOutlet, Footer, Header, CartSidebar],
   selector: 'app-root',
   styleUrl: './app.scss',
   templateUrl: './app.html',

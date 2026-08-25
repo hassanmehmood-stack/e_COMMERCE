@@ -1,0 +1,48 @@
+<section class="cart-page">
+  <div class="container">
+    <div class="page-header">
+      <div>
+        <span class="eyebrow">Your harvest</span>
+        <h1>Shopping Cart</h1>
+        <p>Review your fresh picks before checkout.</p>
+      </div>
+      <a routerLink="/products" class="back-link">Continue Shopping</a>
+    </div>
+
+    @if (cartService.cartItems().length === 0) {
+      <div class="empty-cart">
+        <h2>Your cart is empty</h2>
+        <p>Discover something good for your table.</p>
+        <a routerLink="/products" class="primary-btn">Browse Products</a>
+      </div>
+    } @else {
+      <div class="cart-layout">
+        <div class="cart-list">
+          @for (item of cartService.cartItems(); track item.id) {
+            <article class="cart-item">
+              <img [src]="item.image" [alt]="item.name" />
+              <div class="cart-item-info">
+                <h2>{{ item.name }}</h2>
+                <p>PKR {{ item.price }} each</p>
+                <div class="quantity-controls">
+                  <button type="button" (click)="cartService.decreaseQuantity(item.id)">−</button>
+                  <strong>{{ item.quantity }}</strong>
+                  <button type="button" (click)="cartService.increaseQuantity(item.id)">+</button>
+                </div>
+              </div>
+              <strong class="item-total">PKR {{ item.price * item.quantity }}</strong>
+              <button type="button" class="remove-btn" (click)="cartService.removeFromCart(item.id)">Remove</button>
+            </article>
+          }
+        </div>
+
+        <aside class="summary-card">
+          <span class="eyebrow">Order summary</span>
+          <div><span>Total items</span><strong>{{ cartService.totalItems() }}</strong></div>
+          <div class="summary-total"><span>Total price</span><strong>PKR {{ cartService.totalPrice() }}</strong></div>
+          <button type="button" class="primary-btn">Checkout</button>
+        </aside>
+      </div>
+    }
+  </div>
+</section>

@@ -1,63 +1,58 @@
 <section class="add-product-page">
-
   <div class="container">
-
-    <!-- Header -->
     <div class="page-header">
-
       <div>
         <span class="admin-badge">Admin Panel</span>
-
         <h1>Add Product</h1>
-
-        <p>
-          Add a new product to your store.
-        </p>
+        <p>Add a new product to your store.</p>
       </div>
-
-      <button
-        type="button"
-        class="back-btn"
-        routerLink="/admin"
-      >
+      <button type="button" class="back-btn" routerLink="/admin">
         ← Back to Products
       </button>
-
     </div>
 
-
-    <!-- Form Card -->
     <div class="form-card">
 
-      <form>
+      @if(successMessage()){
+        <div class="success-message toast" role="status">
+          {{successMessage()}}
+        </div>
+      }
+
+      @if(errorMessage()){
+        <div class="error-message">
+          {{errorMessage()}}
+        </div>
+      }
+
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
 
         <div class="form-grid">
 
-          <!-- Product Name -->
           <div class="form-group full">
-
             <label for="name">
               Product Name
             </label>
-
             <input
               id="name"
               type="text"
+              formControlName="name"
               placeholder="Enter product name"
             />
 
+            @if(f.name.touched && f.name.invalid){
+              <small class="field-error">
+                Product name is required
+              </small>
+            }
           </div>
 
-
-          <!-- Price -->
           <div class="form-group">
-
             <label for="price">
               Price
             </label>
 
             <div class="input-wrapper">
-
               <span class="input-prefix">
                 PKR
               </span>
@@ -65,18 +60,20 @@
               <input
                 id="price"
                 type="number"
+                formControlName="price"
                 placeholder="0"
                 min="0"
               />
-
             </div>
 
+            @if(f.price.touched && f.price.invalid){
+              <small class="field-error">
+                Price must be greater than 0
+              </small>
+            }
           </div>
 
-
-          <!-- Stock -->
           <div class="form-group">
-
             <label for="stock">
               Stock
             </label>
@@ -84,58 +81,46 @@
             <input
               id="stock"
               type="number"
+              formControlName="stock"
               placeholder="0"
               min="0"
             />
-
           </div>
 
-
-          <!-- Category -->
           <div class="form-group">
-
             <label for="category">
               Category
             </label>
 
-            <select id="category">
-
+            <select
+              id="category"
+              formControlName="category"
+            >
               <option value="">
                 Select category
               </option>
-
               <option value="fruits">
                 Fruits
               </option>
-
               <option value="vegetables">
                 Vegetables
               </option>
-
               <option value="dairy">
                 Dairy
               </option>
-
               <option value="bakery">
                 Bakery
               </option>
-
               <option value="beverages">
                 Beverages
               </option>
-
               <option value="other">
                 Other
               </option>
-
             </select>
-
           </div>
 
-
-          <!-- Image URL -->
           <div class="form-group">
-
             <label for="image">
               Image URL
             </label>
@@ -143,15 +128,12 @@
             <input
               id="image"
               type="url"
+              formControlName="image"
               placeholder="https://example.com/image.jpg"
             />
-
           </div>
 
-
-          <!-- Description -->
           <div class="form-group full">
-
             <label for="description">
               Description
             </label>
@@ -159,15 +141,13 @@
             <textarea
               id="description"
               rows="6"
+              formControlName="description"
               placeholder="Write a description for your product..."
             ></textarea>
-
           </div>
 
         </div>
 
-
-        <!-- Actions -->
         <div class="form-actions">
 
           <button
@@ -181,8 +161,14 @@
           <button
             type="submit"
             class="btn btn-primary"
+            [disabled]="isLoading()"
           >
-            Add Product
+            @if(isLoading()){
+              Adding Product...
+            }
+            @else{
+              Add Product
+            }
           </button>
 
         </div>
@@ -192,5 +178,4 @@
     </div>
 
   </div>
-
 </section>
